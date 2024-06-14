@@ -1,0 +1,137 @@
+.navbar{
+    display: flex;
+    background-color: transparent;
+    position: absolute;
+    font-family: "Poppins", sans-serif;
+}
+.nav-logo{
+    width: 8rem;
+    height: 9rem;
+    background-color: #fff;
+    color: #99cdd9;
+    margin-left: clamp(0.5rem,5vw,3rem);
+    font-size: 2rem;
+    padding:2rem 0.5rem;
+    line-height: 1;
+    box-shadow: 5px 2px 8px rgb(107, 105, 105) ;
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+.navlogo-span{
+    margin-left: 1rem;
+}
+.nav-items{
+    display: flex;
+    margin: 0 1rem;
+    gap: clamp(0.1rem, 5vw,7rem);
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    height: 6rem;
+    margin-left: 38vw;
+    animation: slideOut 0.5s backwards;
+}
+.nav-items li a{
+    text-decoration: none;
+}
+.nav-about{
+    color: black;
+    font-weight: 450;
+}
+.nav-contact, .nav-login{
+    color: #fff;
+}
+.nav-login{
+    display: flex;
+    width: 3.5rem;
+}
+
+
+.search-book{
+    width: 10rem;
+    height: 2rem;
+    border-radius: 1rem;
+    border: 1px solid grey;
+    padding: 0.3rem 1rem;
+    margin-right: 1rem;
+}
+.search-book:focus{
+    outline: none;
+}
+.search-book::placeholder{
+    font-family: "Poppins", sans-serif;
+    color: #000;
+}
+.nav-menu-icon{
+    display: none;
+    width: 2rem;
+    height: 2rem;
+    margin: 1rem 1rem 0 auto;
+    cursor: pointer;
+}
+
+
+@media (max-width:1170px){
+    .navbar{
+        position: relative;
+        background: #99cdd9;
+    }
+    .nav-items{
+        display: none;
+        margin-right: 0;
+        font-weight: 450;
+    }
+    .nav-menu-icon{
+        display: flex;
+        z-index: 1;
+    }
+    .nav-toggle-on{
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        right: 0;
+        align-items: start;
+        gap: 2rem;
+        height: 18rem;
+        padding: 4rem 2.5rem;
+        border-radius: 0 0 0 0.6rem  ;
+        animation: slideIn 0.5s forwards;
+    }
+    .nav-toggle-on li a{
+        color: #000;
+    }
+    .nav-menu-icon-on{
+        color: #000;
+        background-color: white;
+        border-radius: 0.2rem;
+    }
+    .search-book{
+        border: 1px #000 solid;
+    }
+}
+
+@keyframes slideIn{
+    from {
+        top:-400px;
+        right: 2px;
+        opacity: 0;
+      }
+      to {
+        right: 0;
+        top: 0;
+        opacity: 1;
+      }
+}
+
+@keyframes slideOut{
+    from {
+        top:0;
+        right: 0;
+        opacity: 0;
+      }
+      to {
+        right: -400px;
+        top: 2px;
+        opacity: 1;
+      }
+}

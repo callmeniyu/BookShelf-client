@@ -1,0 +1,150 @@
+:root {
+    --bgcolor: #fce3fe;
+    --btnclr: #615EFC;
+    --greyclr: #5c5c5c;
+}
+
+.loginsignup {
+    display: flex;
+    align-items: center;
+    padding:0 4rem;
+    height: 100vh;
+    gap: 8rem;
+    font-family: "Montserrate",sans-serif;
+    background-image: url("../../assets/images/LoginSignup-bg-img.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.loginsignup-container {
+    width: 43%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    border: 1px solid rgb(195, 192, 192);
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(35px);
+    padding: 3.8rem 5% 5rem;
+}
+.loginsignup-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+.loginsignup-fields input {
+    height: 3rem;
+    padding: 1rem;
+    font-size: clamp(0.79rem, 2vw, 0.9rem);
+    border-color:1px #5c5c5c;
+    border: none;
+}
+.loginsignup-fields input:focus{
+    outline: none;
+}
+.loginsignup-container h1{
+    font-size: 1.78rem;
+}
+.loginsignup-container > button {
+    height: 2.8rem;
+    background: var(--btnclr);
+    outline: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.loginsignup-container > button:active{
+    transform: scale(0.97);
+}
+.loginsignup-container > button:disabled{
+    opacity: .5;
+}
+.loginsignup-login,
+.loginsignup-agree {
+    font-size: 0.8rem;
+    color: #5c5c5c;
+}
+.loginsignup-login span {
+    color: #000;
+    cursor: pointer;
+}
+.loginsignup-agree {
+    display: flex;
+    gap: 0.7rem;
+}
+.loginsignup-agree input{
+    cursor: pointer;
+}
+.loginsignup-google{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+.loginsignup-google>span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.loginsignup-google hr{
+    width: 7.2rem;
+    margin: 0 0.4rem;
+    border: 1.2px solid black;
+}
+.loginsignup-google-ggl{
+    display: flex;
+    gap: 1rem;
+    width: 17rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(35px);
+    text-decoration: none;
+    padding:0.9rem 0.5rem;
+    color: #000;
+    border-radius: 5px;
+    font-size: 1rem !important;
+    color: #000 !important;
+}
+.loginsignup-google-ggl:hover{
+    background-color: #615EFC;
+    color: #fff;
+}
+@media (max-width:900px){
+    .loginsignup-container{
+        width: 22rem;
+    }
+    .loginsignup-google hr{
+        width: 5rem;
+    }
+    .loginsignup-google-ggl{
+        width: 12rem;
+        font-size: 1rem;
+    }
+}
+@media (max-width:700px){
+    .loginsignup{
+        gap: 3rem;
+    }
+    .loginsignup-container{
+        padding-top: 2rem;
+    }
+}
+@media (max-width:550px){
+    .loginsignup{
+        flex-direction: column;
+        background-size: cover;
+        height: 100%;
+        padding-bottom: 3rem;
+    }
+    .loginsignup-google hr{
+        width: 6.8rem;
+    }
+    .loginsignup-google-ggl{
+        width: 16rem;
+        font-size: 1rem;
+    }
+}
