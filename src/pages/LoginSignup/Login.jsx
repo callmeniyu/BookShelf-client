@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import { GoogleLogin } from 'react-google-login';
 import { BookContext } from '../../context/BookContext';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 const Login = () => {
-    const { getAuthToken } = useContext(BookContext)
+    const { getAuthToken, setUser } = useContext(BookContext)
     const navigate = useNavigate()
 
     const [userToken, setUserToken] = useState("")
@@ -27,6 +28,8 @@ const Login = () => {
                 const auth2 = await gapi.auth2.getAuthInstance()
                 const GAuthToken = await auth2.currentUser.get().getAuthResponse().id_token
                 setUserToken(GAuthToken)
+                setUser(res.profileObj.email)
+                const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/googlelogin`,{email:res.profileObj.email})
             } catch (error) {
                 console.log(error)
             }

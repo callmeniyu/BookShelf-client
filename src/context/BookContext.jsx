@@ -8,6 +8,7 @@ let id = 0
 const BookContextProvider = (props) => {
     const [authToken, setAuthToken] = useState("")
     let [books, setBooks] = useState([])
+    const [user, setUser] = useState("")
 
     useEffect(() => {
         const allBooks = async () => {
@@ -27,8 +28,7 @@ const BookContextProvider = (props) => {
         } else {
             book.id = 1
         }
-
-        const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/addbook`, { book })
+        const response = await axios.patch(`${import.meta.env.VITE_LOCAL_API}/addbook`, { email:user, ...book })
     }
 
     const removeBook = async (bookId) => {
@@ -39,7 +39,7 @@ const BookContextProvider = (props) => {
         setAuthToken(userToken)
     }
 
-    const contextValue = { books, addBook, removeBook, getAuthToken, authToken }
+    const contextValue = { books, addBook, removeBook, getAuthToken, authToken, setUser }
     return <BookContext.Provider value={contextValue}>{props.children}</BookContext.Provider>
 }
 

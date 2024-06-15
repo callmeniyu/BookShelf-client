@@ -27,6 +27,21 @@
     backdrop-filter: blur(35px);
     padding: 3.8rem 5% 5rem;
 }
+.loginsignup-logout{
+    background: var(--btnclr);
+    outline: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+    width: 16rem;
+    padding:0.7rem 0.4rem;
+    text-align: center;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-left: 5rem;
+    margin-top: 2.3rem;
+}
 .loginsignup-fields {
     display: flex;
     flex-direction: column;
