@@ -9,15 +9,15 @@ const BookContextProvider = (props) => {
     const [authToken, setAuthToken] = useState("")
     let [books, setBooks] = useState([])
     const [user, setUser] = useState("")
-
     useEffect(() => {
         const allBooks = async () => {
-            const response = await axios.get(`${import.meta.env.VITE_LOCAL_API}/allbooks`)
-            const data = response.data
-            setBooks(data)
+            const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/allbooks`,{email:user})
+            const booksData = response.data.books
+            setBooks(booksData)
         }
         allBooks()
-    }, [])
+    }, [user])
+
 
     const addBook = async (book) => {
         // LOGIC FOR FORMING ID
