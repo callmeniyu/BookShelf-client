@@ -56,6 +56,7 @@ const AddBook = () => {
                         <input
                             type="text"
                             className="AddBook-name-field"
+                            value={formData.name}
                             onChange={handleChange}
                             name="name"
                             id="name"
@@ -66,6 +67,7 @@ const AddBook = () => {
                         <label htmlFor="author">Author</label>
                         <input
                             type="text"
+                            value={formData.author}
                             className="AddBook-author-field"
                             onChange={handleChange}
                             name="author"
@@ -79,6 +81,7 @@ const AddBook = () => {
                             type="text"
                             className="AddBook-isbn-field"
                             onChange={handleChange}
+                            value={formData.isbn}
                             name="isbn"
                             id="isbn"
                             placeholder="Enter isbn of your book"
@@ -88,6 +91,7 @@ const AddBook = () => {
                         <label htmlFor="date">Date</label>
                         <input
                             type="date"
+                            value={formData.date}
                             className="AddBook-date-field"
                             onChange={handleChange}
                             name="date"
@@ -96,7 +100,7 @@ const AddBook = () => {
                     </div>
                     <div className="AddBook-rating">
                         <label htmlFor="rating">Rating</label>
-                        <select className="AddBook-rating-field" name="rating" onChange={handleChange}>
+                        <select className="AddBook-rating-field" name="rating" onChange={handleChange} value={formData.rating}>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -114,6 +118,7 @@ const AddBook = () => {
                         <input
                             type="text"
                             className="AddBook-link-field"
+                            value={formData.link}
                             onChange={handleChange}
                             name="link"
                             id="link"
@@ -124,6 +129,7 @@ const AddBook = () => {
                         <label htmlFor="summary">Summary</label>
                         <textarea
                             className="AddBook-summary-field"
+                            value={formData.summary}
                             onChange={handleChange}
                             name="summary"
                             id="summary"
@@ -134,6 +140,7 @@ const AddBook = () => {
                         <label htmlFor="notes">Notes</label>
                         <textarea
                             className="AddBook-notes-field"
+                            value={formData.notes}
                             onChange={handleChange}
                             name="notes"
                             id="notes"
