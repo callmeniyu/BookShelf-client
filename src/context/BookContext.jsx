@@ -11,13 +11,16 @@ const BookContextProvider = (props) => {
     const [user, setUser] = useState("")
     useEffect(() => {
         const allBooks = async () => {
-            const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/allbooks`,{email:user})
+            const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/allbooks`, { email: user }, {
+                headers: {
+                    "auth-token":localStorage.getItem("auth-token")
+                }
+            })
             const booksData = response.data.books
             setBooks(booksData)
         }
         allBooks()
-    }, [user])
-
+    }, [])
 
     const addBook = async (book) => {
         // LOGIC FOR FORMING ID
@@ -28,11 +31,19 @@ const BookContextProvider = (props) => {
         } else {
             book.id = 1
         }
-        const response = await axios.patch(`${import.meta.env.VITE_LOCAL_API}/addbook`, { email:user, ...book })
+        const response = await axios.patch(`${import.meta.env.VITE_LOCAL_API}/addbook`, { email: user, ...book }, {
+            headers: {
+                "auth-token": localStorage.getItem("auth-token")
+            }
+        })
     }
 
     const removeBook = async (bookId) => {
-        const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/removebook`, { bookId })
+        const response = await axios.delete(`${import.meta.env.VITE_LOCAL_API}/removebook`, { bookId }, {
+            headers: {
+                "auth-token": localStorage.getItem("auth-token")
+            }
+        })
     }
 
     const getAuthToken = (userToken) => {
