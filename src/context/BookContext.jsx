@@ -39,7 +39,7 @@ const BookContextProvider = (props) => {
     }
 
     const removeBook = async (bookId) => {
-        const response = await axios.delete(`${import.meta.env.VITE_LOCAL_API}/removebook`, { bookId }, {
+        const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/removebook`, { bookId }, {
             headers: {
                 "auth-token": localStorage.getItem("auth-token")
             }
