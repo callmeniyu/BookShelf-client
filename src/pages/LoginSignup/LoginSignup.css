@@ -166,4 +166,7 @@
         width: 16rem;
         font-size: 1rem;
     }
+    .loginsignup-logout{
+        margin-left: 0;
+    }
 }
