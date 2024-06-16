@@ -1,14 +1,10 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./LoginSignup.css"
 import Login from "./Login"
 import Logout from "./Logout"
 import { gapi } from "gapi-script"
-import { BookContext } from "../../context/BookContext"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
 const LoginSignup = () => {
-    const {GAuthToken} = useContext(BookContext)
-    const navigate = useNavigate()
     const [state, setState] = useState("Login")
     const [checked, setChecked] = useState(true)
 
@@ -38,7 +34,7 @@ const LoginSignup = () => {
             const data = response.data
             if (data.success) {
                 localStorage.setItem("auth-token", data.token)
-                navigate("/")
+                window.location.href ="/"
             } else {
                 alert(data.message)
             }
@@ -53,7 +49,7 @@ const LoginSignup = () => {
             const data = response.data
             if (data.success) {
                 localStorage.setItem("auth-token", data.token)
-                navigate("/")
+                window.location.href ="/"
             } else {
                 alert(data.message)
             }

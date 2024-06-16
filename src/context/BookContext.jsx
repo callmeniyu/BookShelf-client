@@ -12,7 +12,7 @@ const BookContextProvider = (props) => {
         const allBooks = async () => {
             const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/allbooks`, { email: user }, {
                 headers: {
-                    "auth-token":localStorage.getItem("auth-token")
+                    "auth-token":localStorage.getItem("auth-token") || localStorage.getItem("g-token")
                 }
             })
             const booksData = response.data.books
