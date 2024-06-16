@@ -1,15 +1,14 @@
 import React from 'react'
 import { GoogleLogout } from 'react-google-login'
-import { useNavigate } from 'react-router-dom'
 
 const Logout = () => {
-    const navigate = useNavigate()
     const onSuccess = () => {
+        localStorage.removeItem("g-token")
         console.log("Logout Succesfull")
-        window.location.href = "/"
+        window.location.reload(false)
     }
   return (
-      <div id="signOutButton">
+      <div id="signOutButton" >
           <GoogleLogout 
               clientId={import.meta.env.VITE_GAuth_Client_ID}
               buttonText='Logout'

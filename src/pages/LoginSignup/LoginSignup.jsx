@@ -7,12 +7,10 @@ import { BookContext } from "../../context/BookContext"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 const LoginSignup = () => {
+    const {GAuthToken} = useContext(BookContext)
     const navigate = useNavigate()
-    const { authToken, setUser } = useContext(BookContext)
-
     const [state, setState] = useState("Login")
     const [checked, setChecked] = useState(true)
-    const localAuthToken = localStorage.getItem("auth-token")
 
     const [formData, setFormData] = useState({
         username: "",
@@ -40,7 +38,6 @@ const LoginSignup = () => {
             const data = response.data
             if (data.success) {
                 localStorage.setItem("auth-token", data.token)
-                setUser(formData.email)
                 navigate("/")
             } else {
                 alert(data.message)
@@ -56,7 +53,6 @@ const LoginSignup = () => {
             const data = response.data
             if (data.success) {
                 localStorage.setItem("auth-token", data.token)
-                setUser(formData.email)
                 navigate("/")
             } else {
                 alert(data.message)
@@ -74,9 +70,9 @@ const LoginSignup = () => {
     return (
         <div className="loginsignup">
             {localStorage.getItem("auth-token") ? (
-                <div className="loginsignup-logout" onClick={()=>userLogout()}>Logout</div>
+                <div className={`loginsignup-logout ${localStorage.getItem("g-token") ? "disabled" : ""}`}  onClick={()=>userLogout()}>Logout</div>
             ) : (
-                <div className="loginsignup-container">
+                <div className={`loginsignup-container  ${localStorage.getItem("g-token") ? "disabled" : ""}`} >
                     <h1>{state}</h1>
                     <div className="loginsignup-fields">
                         {state === "Signup" && (
@@ -127,7 +123,7 @@ const LoginSignup = () => {
                     OR
                     <hr />
                 </span>
-                <div className="loginsignup-google-container">{authToken ? <Logout /> : <Login />}</div>
+                <div className="loginsignup-google-container">{localStorage.getItem("g-token") ? <Logout /> : <Login />}</div>
             </div>
         </div>
     )
