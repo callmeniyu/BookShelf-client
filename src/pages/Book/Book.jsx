@@ -26,7 +26,7 @@ const Book = () => {
                                 <h2>{book.author}</h2>
                                 <p>{book.date}</p>
                                 <p>{book.isbn}</p>
-                                <p>{book.rating}/10</p>
+                                <p>Rating: {book.rating}/10</p>
                             </div>
 
                             <div className="book-details-btns">

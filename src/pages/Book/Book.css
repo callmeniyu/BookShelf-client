@@ -112,6 +112,7 @@
     align-items: flex-start;
     padding: 0 3.5rem;
     line-height: 1.5;
+    color: #000 !important;
 }
 .backto-home-btn{
     width: 8.5rem;
@@ -184,5 +185,34 @@
         flex-direction: column;
         gap: 1rem;
         align-items: center;
+    }
+    .book-details-btns{
+        flex-direction: row;
+    }
+    .book-edit-btn, .buy-online-btn{
+        width: 10rem !important;
+    }
+    .book-left{
+        padding: 0 0.8rem;
+    }
+    .book{
+        background-size: 28rem;
+    }
+    .book-alternative-left img{
+        width: 16rem;
+    }  
+    .book-details p:nth-child(5){
+        width: 100%;
+    }
+    .book-notes-list{
+        padding: 0;
+        color: #000;
+        font-size: 1rem;
+    }
+    .book-notes{
+        padding: 0 1.2rem !important;
+    }
+    .backto-home-btn{
+        margin-bottom: 1rem;
     }
 }

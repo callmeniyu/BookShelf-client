@@ -19,7 +19,7 @@ const Books = (props) => {
                                     <h2>{book.author || "Auther Name"}</h2>
                                     <p>{book.date || "Date"}</p>
                                     <p>isbn: {book.isbn}</p>
-                                    <p>{book.rating || 0}/10</p>
+                                    <p>Rating: {book.rating || 0}/10</p>
                                 </div>
 
                                 <div className="books-details-btns">

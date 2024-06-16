@@ -37,7 +37,7 @@ const Navbar = () => {
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                style={{ fill: " rgba(0, 0, 0, 1)", transform: "", msFilter: "" }}
+                style={{ fill: " rgba(255, 255, 255)", transform: "", msFilter: "" }}
             >
                 <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
             </svg>

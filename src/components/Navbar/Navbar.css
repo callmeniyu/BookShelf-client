@@ -85,24 +85,24 @@
         z-index: 1;
     }
     .nav-toggle-on{
+        width: 100%;
         display: flex;
         flex-direction: column;
-        background-color: #fff;
+        align-items: center;
+        justify-content: center;
+        background-color: #000;
         position: absolute;
         right: 0;
         align-items: start;
         gap: 2rem;
         height: 18rem;
         padding: 4rem 2.5rem;
-        border-radius: 0 0 0 0.6rem  ;
         animation: slideIn 0.5s forwards;
     }
     .nav-toggle-on li a{
-        color: #000;
+        color: #fff;
     }
     .nav-menu-icon-on{
-        color: #000;
-        background-color: white;
         border-radius: 0.2rem;
     }
     .search-book{
