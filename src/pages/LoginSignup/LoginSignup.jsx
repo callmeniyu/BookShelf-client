@@ -7,12 +7,13 @@ import axios from "axios"
 const LoginSignup = () => {
     const [state, setState] = useState("Login")
     const [checked, setChecked] = useState(true)
+    const [errors, setErrors] = useState({});
 
     const [formData, setFormData] = useState({
         username: "",
         password: "",
         email: "",
-    })
+    });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -30,6 +31,7 @@ const LoginSignup = () => {
 
     const userLogin = async () => {
         try {
+            console.log("User data submitted ", formData)
             const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/login`, { formData })
             const data = response.data
             if (data.success) {
@@ -49,14 +51,15 @@ const LoginSignup = () => {
             const data = response.data
             if (data.success) {
                 localStorage.setItem("auth-token", data.token)
-                window.location.href ="/"
+                window.location.href = "/"
             } else {
                 alert(data.message)
             }
         } catch (error) {
-            console.log(error)
+
+            console.log("validation erros", error)
         }
-    }
+    };
 
     const userLogout = () => {
         localStorage.removeItem("auth-token")
@@ -78,22 +81,26 @@ const LoginSignup = () => {
                                 onChange={handleChange}
                                 type="text"
                                 placeholder="Your Name"
-                            />
-                        )}
+                                />
+                            )}
+                        {errors.username && <div className="error">{ errors.username}</div> }
                         <input
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
                             type="email"
                             placeholder="Email Address"
-                        />
+                            />
+                        {errors.username && <div className="error">{ errors.username}</div> }
+
                         <input
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
                             type="password"
                             placeholder="Password"
-                        />
+                            />
+                        {errors.username && <div className="error">{ errors.username}</div> }
                     </div>
                     <button disabled={checked} onClick={() => (state === "Login" ? userLogin() : userSignup())}>
                         Continue

@@ -79,8 +79,8 @@
     flex-direction: column;
     gap: 0.5rem;
 }
-.AddBook-submit-btn {grid-column: span 3;
-
+.AddBook-submit-btn {
+    grid-column: span 3;
 }
 .AddBook-img-field{
     grid-area: 7 / 1 / 8 / 4;
@@ -172,6 +172,10 @@
     text-decoration: none;
 }
 
+.error{
+    font-size: 0.9rem;
+    color: rgb(249, 60, 60);
+}
 
 @media (max-width: 720px) {
     .AddBook-container {

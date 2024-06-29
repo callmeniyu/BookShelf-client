@@ -5,10 +5,11 @@ import upload_area from "../../assets/upload_area.svg"
 import { BookContext } from "../../context/BookContext"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import * as Yup from "yup"
+
 const AddBook = () => {
     const [image, setImage] = useState(false)
     const { addBook } = useContext(BookContext)
-
 
     const [formData, setFormData] = useState({
         name: "",
@@ -22,25 +23,50 @@ const AddBook = () => {
         img: "",
     })
 
+    const [errors, setErrors] = useState({})
+
+    const validationSchema = Yup.object({
+        name: Yup.string().required("Give name of the book"),
+        author: Yup.string().required("Give author name").max(30, "Author name should be less than 30 chararcters"),
+        isbn: Yup.number().typeError("isbn must be a number").required("isbn number is required"),
+        date: Yup.string().required("Give a date "),
+        link: Yup.string().required("Give online link"),
+        summary: Yup.string()
+            .max(600, "Summary should be less than 600 characters")
+            .required("Provide atleast one sentence summary."),
+        notes: Yup.string().required("Give your notes."),
+    })
+
     const handleChange = (e) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    const submitBook = async(e) => {
-        const newForm = new FormData()
-        newForm.append("book", image)
-        const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/upload`, newForm)
-        const data = response.data
-        console.log(data.img_url)
-        if (data.success) {
-            formData.img = data.img_url
-        } else {
-            console.log("Error uploading image")
-        }
-        addBook(formData)
-        alert("Book added")
-        window.location.href = "/"
+    const submitBook = async (e) => {
+        try {
+            await validationSchema.validate(formData, { abortEarly: false })
+            const newForm = new FormData()
+            newForm.append("book", image)
+            const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/upload`, newForm)
+            const data = response.data
+            console.log(data.img_url)
+            if (data.success) {
+                formData.img = data.img_url
+            } else {
+                console.log("Error uploading image")
+            }
+            addBook(formData)
+            alert("Book added")
+            window.location.href = "/"
+        } catch (error) {
+            console.log(error)
+            const newErrors = {}
 
+            error.inner.forEach((err) => {
+                newErrors[err.path] = err.message
+            })
+
+            setErrors(newErrors)
+        }
     }
 
     const handleImage = (e) => {
@@ -50,7 +76,7 @@ const AddBook = () => {
         <div className="AddBook">
             <div className="AddBook-container">
                 <h3>new book</h3>
-                <form className="AddBook-form" onSubmit={(e)=>e.preventDefault()}>
+                <form className="AddBook-form" onSubmit={(e) => e.preventDefault()}>
                     <div className="AddBook-name">
                         <label htmlFor="name">Name</label>
                         <input
@@ -62,6 +88,7 @@ const AddBook = () => {
                             id="name"
                             placeholder="Enter name of your book"
                         />
+                        {errors.name && <div className="error">{errors.name}</div>}
                     </div>
                     <div className="AddBook-author">
                         <label htmlFor="author">Author</label>
@@ -74,6 +101,7 @@ const AddBook = () => {
                             id="author"
                             placeholder="Enter name of the auther"
                         />
+                        {errors.author && <div className="error">{errors.author}</div>}
                     </div>
                     <div className="AddBook-isbn">
                         <label htmlFor="rating">ISBN</label>
@@ -86,6 +114,7 @@ const AddBook = () => {
                             id="isbn"
                             placeholder="Enter isbn of your book"
                         />
+                        {errors.isbn && <div className="error">{errors.isbn}</div>}
                     </div>
                     <div className="AddBook-date">
                         <label htmlFor="date">Date</label>
@@ -97,10 +126,16 @@ const AddBook = () => {
                             name="date"
                             id="date"
                         />
+                        {errors.date && <div className="error">{errors.date}</div>}
                     </div>
                     <div className="AddBook-rating">
                         <label htmlFor="rating">Rating</label>
-                        <select className="AddBook-rating-field" name="rating" onChange={handleChange} value={formData.rating}>
+                        <select
+                            className="AddBook-rating-field"
+                            name="rating"
+                            onChange={handleChange}
+                            value={formData.rating}
+                        >
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -124,6 +159,7 @@ const AddBook = () => {
                             id="link"
                             placeholder="Provide link to the online store"
                         />
+                        {errors.link && <div className="error">{errors.link}</div>}
                     </div>
                     <div className="AddBook-summary">
                         <label htmlFor="summary">Summary</label>
@@ -135,6 +171,7 @@ const AddBook = () => {
                             id="summary"
                             placeholder="Give the summary of the book."
                         ></textarea>
+                        {errors.summary && <div className="error">{errors.summary}</div>}
                     </div>
                     <div className="AddBook-notes">
                         <label htmlFor="notes">Notes</label>
@@ -146,14 +183,11 @@ const AddBook = () => {
                             id="notes"
                             placeholder="Describe your learnings from the book"
                         ></textarea>
+                        {errors.notes && <div className="error">{errors.notes}</div>}
                     </div>
                     <div className="AddBook-img-field">
                         <label htmlFor="file-input">
-                            <img
-                                src={image ? URL.createObjectURL(image) : upload_area}
-                                className="AddBook-img"
-                                alt=""
-                            />
+                            <img src={image ? URL.createObjectURL(image) : upload_area} className="AddBook-img" alt="" />
                         </label>
                         <input type="file" onChange={handleImage} name="image" id="file-input" hidden />
                     </div>
