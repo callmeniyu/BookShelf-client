@@ -45,9 +45,18 @@ const BookContextProvider = (props) => {
         })
     }
 
+    const updateBook = async (bookId, formData) => {
+        console.log(bookId, formData)
+        const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/updatebook`, { bookId:bookId, formData:formData}, {
+            headers: {
+                "auth-token": localStorage.getItem("auth-token") || localStorage.getItem("g-token")
+            }
+        });
+    };
 
 
-    const contextValue = { books, addBook, removeBook, setUser }
+
+    const contextValue = { books, addBook, removeBook, setUser, updateBook }
     return <BookContext.Provider value={contextValue}>{props.children}</BookContext.Provider>
 }
 

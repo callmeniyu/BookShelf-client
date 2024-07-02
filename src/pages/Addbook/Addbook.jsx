@@ -1,13 +1,17 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import "./Addbook.css"
 import Footer from "../../components/Footer/Footer"
 import upload_area from "../../assets/upload_area.svg"
 import { BookContext } from "../../context/BookContext"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import axios from "axios"
 import * as Yup from "yup"
 
 const AddBook = () => {
+    const { bookId } = useParams()
+    const imageRef = useRef()
+    const { books, updateBook } = useContext(BookContext)
+    const book = books.find((particularbook) => particularbook.id == bookId)
     const [image, setImage] = useState(false)
     const { addBook } = useContext(BookContext)
 
@@ -22,6 +26,21 @@ const AddBook = () => {
         notes: "",
         img: "",
     })
+
+    useEffect(() => {
+        if (book) {
+            setFormData({
+                name: book.name || "",
+                author: book.author || "",
+                isbn: book.isbn || "",
+                date: book.date || "",
+                rating: book.rating || "",
+                link: book.link || "",
+                summary: book.summary || "",
+                notes: book.notes || "",
+            })
+        }
+    }, [book])
 
     const [errors, setErrors] = useState({})
 
@@ -44,18 +63,26 @@ const AddBook = () => {
     const submitBook = async (e) => {
         try {
             await validationSchema.validate(formData, { abortEarly: false })
-            const newForm = new FormData()
-            newForm.append("book", image)
-            const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/upload`, newForm)
-            const data = response.data
-            console.log(data.img_url)
-            if (data.success) {
-                formData.img = data.img_url
-            } else {
-                console.log("Error uploading image")
+            if (!book) {
+                const newForm = new FormData()
+                newForm.append("book", image)
+                const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/upload`, newForm)
+                const data = response.data
+                console.log(data.img_url)
+                if (data.success) {
+                    formData.img = data.img_url
+                } else {
+                    console.log("Error uploading image")
+                }
             }
-            addBook(formData)
-            alert("Book added")
+            if (bookId) {
+                updateBook(bookId, formData)
+                alert("Book updated")
+
+            } else {
+                addBook(formData)
+                alert("Book added")
+            }
             window.location.href = "/"
         } catch (error) {
             console.log(error)
@@ -72,17 +99,24 @@ const AddBook = () => {
     const handleImage = (e) => {
         setImage(e.target.files[0])
     }
+
+    useEffect(() => {
+        if (image) {
+            const imgURL = URL.createObjectURL(image)
+            imageRef.current.src = imgURL
+        }
+    }, [image])
     return (
         <div className="AddBook">
             <div className="AddBook-container">
-                <h3>new book</h3>
+                <h3>{ book ? "edit book" : "new book"}</h3>
                 <form className="AddBook-form" onSubmit={(e) => e.preventDefault()}>
                     <div className="AddBook-name">
                         <label htmlFor="name">Name</label>
                         <input
                             type="text"
-                            className="AddBook-name-field"
                             value={formData.name}
+                            className="AddBook-name-field"
                             onChange={handleChange}
                             name="name"
                             id="name"
@@ -187,7 +221,16 @@ const AddBook = () => {
                     </div>
                     <div className="AddBook-img-field">
                         <label htmlFor="file-input">
-                            <img src={image ? URL.createObjectURL(image) : upload_area} className="AddBook-img" alt="" />
+                            {book ? (
+                                <img ref={imageRef} src={book.img} className="AddBook-img" />
+                            ) : (
+                                    <img
+                                    ref={imageRef}
+                                    src={image ? URL.createObjectURL(image) : upload_area}
+                                    className="AddBook-img"
+                                    alt=""
+                                />
+                            )}
                         </label>
                         <input type="file" onChange={handleImage} name="image" id="file-input" hidden />
                     </div>

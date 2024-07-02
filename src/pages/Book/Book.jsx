@@ -30,7 +30,7 @@ const Book = () => {
                             </div>
 
                             <div className="book-details-btns">
-                                <Link className="book-edit-btn">
+                                <Link to={`/edit/${bookId}`} className="book-edit-btn">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
