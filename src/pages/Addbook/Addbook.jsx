@@ -60,39 +60,42 @@ const AddBook = () => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
     }
 
+    useEffect(() => {
+        const sendImage = async () => {
+            const newForm = new FormData()
+            newForm.append("book", image)
+            const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/upload`, newForm)
+            const data = response.data
+            if (data.success) {
+                formData.img = data.img_url
+            } else {
+                console.log("Error uploading image")
+            }
+        }
+        sendImage()
+    }, [image])
+
+
     const submitBook = async (e) => {
         try {
             await validationSchema.validate(formData, { abortEarly: false })
-            if (!book) {
-                const newForm = new FormData()
-                newForm.append("book", image)
-                const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/upload`, newForm)
-                const data = response.data
-                console.log(data.img_url)
-                if (data.success) {
-                    formData.img = data.img_url
-                } else {
-                    console.log("Error uploading image")
-                }
-            }
             if (bookId) {
                 updateBook(bookId, formData)
                 alert("Book updated")
-
             } else {
                 addBook(formData)
                 alert("Book added")
             }
             window.location.href = "/"
         } catch (error) {
-            console.log(error)
             const newErrors = {}
-
             error.inner.forEach((err) => {
                 newErrors[err.path] = err.message
             })
-
             setErrors(newErrors)
+            if (!image) {
+                setErrors((prev)=>({...prev,img:"needed"}))
+            }
         }
     }
 
@@ -109,7 +112,7 @@ const AddBook = () => {
     return (
         <div className="AddBook">
             <div className="AddBook-container">
-                <h3>{ book ? "edit book" : "new book"}</h3>
+                <h3>{book ? "edit book" : "new book"}</h3>
                 <form className="AddBook-form" onSubmit={(e) => e.preventDefault()}>
                     <div className="AddBook-name">
                         <label htmlFor="name">Name</label>
@@ -224,7 +227,7 @@ const AddBook = () => {
                             {book ? (
                                 <img ref={imageRef} src={book.img} className="AddBook-img" />
                             ) : (
-                                    <img
+                                <img
                                     ref={imageRef}
                                     src={image ? URL.createObjectURL(image) : upload_area}
                                     className="AddBook-img"
@@ -233,6 +236,7 @@ const AddBook = () => {
                             )}
                         </label>
                         <input type="file" onChange={handleImage} name="image" id="file-input" hidden />
+                        {errors.img && <div className="error">{errors.img}</div>}
                     </div>
                     <Link className="AddBook-submit-btn" onClick={() => submitBook()}>
                         Submit
