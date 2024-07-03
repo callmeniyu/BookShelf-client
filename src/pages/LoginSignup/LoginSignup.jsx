@@ -4,10 +4,16 @@ import Login from "./Login"
 import Logout from "./Logout"
 import { gapi } from "gapi-script"
 import axios from "axios"
+import { Alert, Slide, Snackbar } from "@mui/material"
 const LoginSignup = () => {
     const [state, setState] = useState("Login")
     const [checked, setChecked] = useState(true)
     const [errors, setErrors] = useState({});
+    const [alert, setAlert] = useState({
+        open: false,
+        message: "",
+        severity:""
+    })
 
     const [formData, setFormData] = useState({
         username: "",
@@ -38,7 +44,7 @@ const LoginSignup = () => {
                 localStorage.setItem("auth-token", data.token)
                 window.location.href ="/"
             } else {
-                alert(data.message)
+                setAlert({ open: true, message: data.message, severity:"error" })
             }
         } catch (error) {
             console.log(error)
@@ -53,7 +59,7 @@ const LoginSignup = () => {
                 localStorage.setItem("auth-token", data.token)
                 window.location.href = "/"
             } else {
-                alert(data.message)
+                setAlert({ open: true, message: data.message, severity:"error" })
             }
         } catch (error) {
 
@@ -68,6 +74,21 @@ const LoginSignup = () => {
 
     return (
         <div className="loginsignup">
+            <Slide direction="up" in={alert.open} mountOnEnter unmountOnExit>
+            <Snackbar className="snackbar" open={alert.open} autoHideDuration={1000}   >
+                <Alert
+                    severity={alert.severity}
+                    variant="filled"
+                    onClose={() => {
+                        setAlert({ open: false })
+                    }}
+                    className="alert"
+                    sx={{ width: "22rem" }}
+                >
+                    {alert.message}
+                </Alert>
+            </Snackbar>
+            </Slide>
             {localStorage.getItem("auth-token") ? (
                 <div className={`loginsignup-logout ${localStorage.getItem("g-token") ? "disabled" : ""}`}  onClick={()=>userLogout()}>Logout</div>
             ) : (

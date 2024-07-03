@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
+import { Alert,  Slide,  Snackbar } from "@mui/material"
 import "./Addbook.css"
 import Footer from "../../components/Footer/Footer"
 import upload_area from "../../assets/upload_area.svg"
@@ -13,6 +14,11 @@ const AddBook = () => {
     const { books, updateBook } = useContext(BookContext)
     const book = books.find((particularbook) => particularbook.id == bookId)
     const [image, setImage] = useState(false)
+    const [alert, setAlert] = useState({
+        open: false,
+        message: "",
+        severity:""
+    })
     const { addBook } = useContext(BookContext)
 
     const [formData, setFormData] = useState({
@@ -75,18 +81,16 @@ const AddBook = () => {
         sendImage()
     }, [image])
 
-
     const submitBook = async (e) => {
         try {
             await validationSchema.validate(formData, { abortEarly: false })
             if (bookId) {
                 updateBook(bookId, formData)
-                alert("Book updated")
+                setAlert({ open: true, message: "Book Updated", severity:"" })
             } else {
                 addBook(formData)
-                alert("Book added")
+                setAlert({ open: true, message: "Book Added", severity:""})
             }
-            window.location.href = "/"
         } catch (error) {
             const newErrors = {}
             error.inner.forEach((err) => {
@@ -94,7 +98,7 @@ const AddBook = () => {
             })
             setErrors(newErrors)
             if (!image) {
-                setErrors((prev)=>({...prev,img:"needed"}))
+                setErrors((prev) => ({ ...prev, img: "needed" }))
             }
         }
     }
@@ -111,6 +115,22 @@ const AddBook = () => {
     }, [image])
     return (
         <div className="AddBook">
+            <Slide direction="up" in={alert.open} mountOnEnter unmountOnExit>
+            <Snackbar className="snackbar" open={alert.open} autoHideDuration={1000}  >
+                <Alert
+                    severity="success"
+                    variant="filled"
+                    onClose={() => {
+                        window.location.href = "/"
+                        setAlert({ open: false, message: "" })
+                    }}
+                    className="alert"
+                    sx={{ width: "20rem" }}
+                >
+                    {alert.message}
+                </Alert>
+            </Snackbar>
+            </Slide>
             <div className="AddBook-container">
                 <h3>{book ? "edit book" : "new book"}</h3>
                 <form className="AddBook-form" onSubmit={(e) => e.preventDefault()}>

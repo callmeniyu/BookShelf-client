@@ -11,7 +11,11 @@
     "host": "vite --host"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@mui/icons-material": "^5.15.21",
+    "@mui/material": "^5.15.21",
     "axios": "^1.7.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

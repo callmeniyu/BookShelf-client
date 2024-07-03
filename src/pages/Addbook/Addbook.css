@@ -176,7 +176,12 @@
     font-size: 0.9rem;
     color: rgb(249, 60, 60);
 }
-
+.alert{
+    width: 20rem;
+}
+.snackbar{
+    margin-bottom: 4vh;
+}
 @media (max-width: 720px) {
     .AddBook-container {
         width: 85%;
