@@ -4,24 +4,29 @@
     top: 0;
     font-family: "Poppins", sans-serif;
 }
-.account-logo{
+.account-logo {
     visibility: hidden;
 }
-.contact-navbar{
+.contact-navbar {
     background-color: #99cdd9;
     width: 100%;
     justify-content: space-between;
     padding-right: 2rem;
 }
-.book-navbar{
+.book-navbar {
     background-color: #c1e7c5;
     width: 100%;
     justify-content: space-between;
     padding-right: 2rem;
-
 }
-.about-navbar{
+.about-navbar {
     background-color: #c1e7c5;
+    width: 100%;
+    justify-content: space-between;
+    padding-right: 2rem;
+}
+.addbook-navbar {
+    background-color: #a48ecc;
     width: 100%;
     justify-content: space-between;
     padding-right: 2rem;
@@ -32,10 +37,13 @@
     justify-content: space-between;
     padding-right: 2rem;
 }
-.contact-navbar ul, .about-navbar ul, .account-navbar ul {
+.contact-navbar ul,
+.about-navbar ul,
+.account-navbar ul {
 }
 .contact-navbar ul li:nth-child(4),
 .about-navbar ul li:nth-child(4),
+.addbook-navbar ul li:nth-child(4),
 .book-navbar ul li:nth-child(4),
 .account-navbar ul li:nth-child(4) {
     display: none;
@@ -119,6 +127,14 @@
 }
 
 @media (max-width: 1170px) {
+
+    .section-contact,
+    .section-about,
+    .section-account,
+    .section-home {
+        color: #fff !important;
+        font-weight: 500;
+    }
     .navbar {
         position: relative;
         z-index: 10;
@@ -139,7 +155,7 @@
         align-items: center;
         justify-content: center;
         background-color: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(35px);        
+        backdrop-filter: blur(35px);
         position: absolute;
         border: 1px solid white;
         right: 0;
@@ -157,6 +173,11 @@
     }
     .search-book {
         border: 1px #000 solid;
+    }
+    .nav-about,
+    .nav-contact,
+    .nav-login {
+        color: #000 !important;
     }
 }
 

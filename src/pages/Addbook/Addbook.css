@@ -8,6 +8,7 @@
     height: 100%;
 }
 .AddBook-container {
+    margin-top: 10rem;
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -181,6 +182,11 @@
 }
 .snackbar{
     margin-bottom: 4vh;
+}
+@media (max-width:1170px){
+    .AddBook-container {
+        margin-top: 2rem;
+    }
 }
 @media (max-width: 720px) {
     .AddBook-container {

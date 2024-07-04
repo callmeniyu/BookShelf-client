@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { Alert,  Slide,  Snackbar } from "@mui/material"
+import { Alert, Slide, Snackbar } from "@mui/material"
+import Navbar from "../../components/Navbar/Navbar"
 import "./Addbook.css"
 import Footer from "../../components/Footer/Footer"
 import upload_area from "../../assets/upload_area.svg"
@@ -114,7 +115,9 @@ const AddBook = () => {
         }
     }, [image])
     return (
-        <div className="AddBook">
+        <>
+            <Navbar  section="addbook"/>
+<div className="AddBook">
             <Slide direction="up" in={alert.open} mountOnEnter unmountOnExit>
             <Snackbar className="snackbar" open={alert.open} autoHideDuration={1000}  >
                 <Alert
@@ -265,6 +268,8 @@ const AddBook = () => {
             </div>
             <Footer />
         </div>
+        </>
+        
     )
 }
 

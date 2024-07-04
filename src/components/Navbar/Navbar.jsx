@@ -8,7 +8,7 @@ const Navbar = (props) => {
     const [section, setSection] = useState(props.section)
 
     return (
-        <div className={`navbar ${section === "home" ? "home-navbar":""} ${section === "about" ? "about-navbar":""} ${section === "contact" ? "contact-navbar":""} ${section === "account" ? "account-navbar":""} ${section === "book" ? "book-navbar":""}`}>
+        <div className={`navbar ${section === "home" ? "home-navbar":""} ${section === "about" ? "about-navbar":""} ${section === "contact" ? "contact-navbar":""} ${section === "account" ? "account-navbar":""} ${section === "book" ? "book-navbar":""} ${section === "addbook" ? "addbook-navbar":""}`}>
             <div className={`nav-logo ${section == "home" ? "home-logo" : ""} ${section == "account" ? "account-logo" : ""} `}>
                 <h3>
                     book <span className="navlogo-span">shelf</span>
