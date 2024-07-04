@@ -4,20 +4,41 @@ import "./Book.css"
 import Footer from "../../components/Footer/Footer"
 import { BookContext } from "../../context/BookContext"
 import Navbar from "../../components/Navbar/Navbar"
+import { Alert, Slide, Snackbar } from "@mui/material"
 const Book = () => {
     const { bookId } = useParams()
     const { books, removeBook } = useContext(BookContext)
+    const [alert, setAlert] = useState({
+        open: false,
+        message: "",
+        severity:""
+    })
     const book = books.find((particularbook) => particularbook.id == bookId)
     window.scrollTo(0, 0)
     const handleRemove = (bookId) => {
         removeBook(bookId)
-        alert(`${book.name} removed`)
-        window.location.href = "/"
+        setAlert({ open: true, message: "Book removed", severity: "error" })
     }
 
     return (
         <>
-            <Navbar section="book"/>
+            <Navbar section="book" />
+            <Slide direction="up" in={alert.open} mountOnEnter unmountOnExit>
+            <Snackbar className="snackbar" open={alert.open} autoHideDuration={1000}  >
+                <Alert
+                    severity={alert.severity}
+                    variant="filled"
+                    onClose={() => {
+                        window.location.href = "/"
+                        setAlert({ open: false, message: "" })
+                    }}
+                    className="alert"
+                    sx={{ width: "20rem" }}
+                >
+                    {alert.message}
+                </Alert>
+            </Snackbar>
+            </Slide>
             <div className="book">
                 <div className="book-wrap">
                     <div>

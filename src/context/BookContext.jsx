@@ -59,7 +59,7 @@ const BookContextProvider = (props) => {
         const response = books.filter((book) => book.name.toLowerCase() == bookName.toLowerCase() || book.author.toLowerCase() == bookName.toLowerCase() || book.isbn.toLowerCase() == bookName.toLowerCase() || book.rating.toLowerCase() == bookName.toLowerCase() || book.date.toLowerCase() == bookName.toLowerCase())
         setSearchedBook(response)
         if (!response.length == 0) {
-            window.scrollTo(550,550) 
+            window.scrollTo(680,680) 
         } 
         
     }

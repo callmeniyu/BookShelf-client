@@ -55,9 +55,10 @@
     color: #000000 !important;
     font-weight: 500;
 }
-.home-logo {
-    color: #99cdd9;
+.home-logo{
+    color: #99cdd9 !important;
 }
+
 
 .nav-logo {
     width: 8rem;
