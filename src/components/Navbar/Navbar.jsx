@@ -3,25 +3,26 @@ import { Link, useNavigate } from "react-router-dom"
 import "./Navbar.css"
 import { BookContext } from "../../context/BookContext"
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [menuToggler, setMenuToggler] = useState(false)
+    const [section, setSection] = useState(props.section)
 
     return (
-        <div className="navbar">
-            <div className="nav-logo">
+        <div className={`navbar ${section === "home" ? "home-navbar":""} ${section === "about" ? "about-navbar":""} ${section === "contact" ? "contact-navbar":""} ${section === "account" ? "account-navbar":""} ${section === "book" ? "book-navbar":""}`}>
+            <div className={`nav-logo ${section == "home" ? "home-logo" : ""} ${section == "account" ? "account-logo" : ""} `}>
                 <h3>
                     book <span className="navlogo-span">shelf</span>
                 </h3>
             </div>
             <ul className={`nav-items ${menuToggler && "nav-toggle-on"}`}>
                 <li>
-                    <Link className="nav-about">About</Link>
+                    <Link to="/about" className={`nav-about ${props.section == "about" && "section-about"} ${props.section == "home" && "section-home"}`}>About</Link>
                 </li>
                 <li>
-                    <Link className="nav-contact">Contact</Link>
+                    <Link to="/contact" className={`nav-contact ${props.section === "contact" && "section-contact"}`}>Contact</Link>
                 </li>
                 <li>
-                    <Link to="/login" className="nav-login">
+                    <Link to="/login" className={`nav-login ${props.section === "account" && "section-account"}`}>
                         Account
                     </Link>
                 </li>
@@ -29,7 +30,6 @@ const Navbar = () => {
                     <input type="text" className="search-book" placeholder="search book" />
                 </li>
             </ul>
-            <div></div>
             <svg
                 onClick={() => setMenuToggler((prev) => !prev)}
                 className={`nav-menu-icon `}

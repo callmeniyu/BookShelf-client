@@ -3,18 +3,15 @@
     --btnclr: #615EFC;
     --greyclr: #5c5c5c;
 }
-
 .loginsignup {
     display: flex;
     align-items: center;
     padding:0 4rem;
+    padding-top: 4rem;
     height: 100vh;
     gap: 8rem;
     font-family: "Montserrate",sans-serif;
-    background-image: url("../../assets/images/LoginSignup-bg-img.jpeg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #a48ecc;
 }
 
 .loginsignup-container {
@@ -23,12 +20,13 @@
     flex-direction: column;
     gap: 1.2rem;
     border: 1px solid rgb(195, 192, 192);
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(35px);
-    padding: 3.8rem 5% 5rem;
+    padding: 3rem 5% 3rem;
+    border-radius: 6px;
 }
 .loginsignup-logout{
-    background: var(--btnclr);
+    background: #51397e;
     outline: none;
     border: none;
     color: white;
@@ -62,7 +60,7 @@
 }
 .loginsignup-container > button {
     height: 2.8rem;
-    background: var(--btnclr);
+    background: #51397e;
     outline: none;
     border: none;
     color: white;
@@ -146,6 +144,7 @@
 @media (max-width:700px){
     .loginsignup{
         gap: 3rem;
+        padding: 0 2rem !important;
     }
     .loginsignup-container{
         padding-top: 2rem;

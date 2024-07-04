@@ -9,7 +9,7 @@ const Home = () => {
   window.scrollTo(0,0)
   return (
     <div className='home'>
-      <Navbar />
+      <Navbar section="home"/>
       <Hero />
       <Books />
       <Footer />

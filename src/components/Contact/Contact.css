@@ -1,0 +1,88 @@
+
+.contact {
+    display: flex;
+    padding: 12rem 6rem 2rem;
+    width: 100%;
+    background-color: #99cdd9;
+}
+.contact-right {
+    width: 50%;
+}
+.contact-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.contact-left-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.contact-left-item {
+    display: flex;
+    gap: 1rem;
+    margin-left: 1rem;
+}
+.contact-right form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.contact-right form input {
+    height: 2.3rem;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(100px);
+    border: 1px solid rgb(248, 248, 248);
+}
+.contact-right form input:focus {
+    outline: none;
+}
+.contact-right-textarea:focus {
+    outline: none;
+}
+.contact-right-textarea {
+    height: 10rem;
+    background-color: rgba(255, 255, 255, 0.25);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgb(248, 248, 248);
+}
+.contact-send-btn {
+    background-color: #000 !important;
+    color: white;
+    font-size: 1rem;
+    font-family: "poppins", sans-serif;
+    cursor: pointer;
+}
+
+@media (max-width:1170px){
+    .contact{
+        padding: 4rem 4rem;
+    }
+}
+@media (max-width:850px){
+    .contact{
+        flex-direction: column;
+        gap: 3rem;
+    }
+    .contact-right form{
+        align-self: flex-end;
+    }
+    .contact-right, .contact-left{
+        width: 90%;
+    }
+}
+
+@media (max-width:1170px){
+    .contact{
+        padding: 4rem 2rem;
+    }
+    .contact-right, .contact-left{
+        width: 100%;
+    }
+}
