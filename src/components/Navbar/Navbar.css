@@ -85,6 +85,20 @@
     margin-left: 38vw;
     animation: slideOut 0.5s backwards;
 }
+.navbar-search-icon{
+    position: absolute;
+    right: 2.5rem;
+    margin-top: 0.25rem;
+    color: rgb(86, 85, 85);
+    cursor: pointer;
+}
+.navbar-close-icon{
+    position: absolute;
+    right: 2.5rem;
+    margin-top: 0.25rem;
+    color: rgb(86, 85, 85);
+    cursor: pointer;
+}
 .nav-items li a {
     text-decoration: none;
 }
@@ -108,6 +122,7 @@
     border: 1px solid grey;
     padding: 0.3rem 1rem;
     margin-right: 1rem;
+    padding-right: 3rem;
 }
 .search-book:focus {
     outline: none;
@@ -134,6 +149,11 @@
     .section-home {
         color: #fff !important;
         font-weight: 500;
+    }
+    .navbar-search-icon, .navbar-close-icon{
+        position: absolute;
+        top: 13.2rem;
+        left: 10.5rem;
     }
     .navbar {
         position: relative;

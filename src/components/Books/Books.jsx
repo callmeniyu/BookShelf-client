@@ -1,15 +1,52 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import BookStack_img from "../../assets/images/bookStack_img.png"
 import { BookContext } from "../../context/BookContext"
 import "./Books.css"
+import { Alert, Slide, Snackbar } from "@mui/material"
 
 const Books = (props) => {
-    const { books } = useContext(BookContext)
+    const { books, searchedBook } = useContext(BookContext)
+    const [bookCollecion, setBookCollection] = useState([])
+    const [alert, setAlert] = useState({
+        open: false,
+        message: "",
+        severity: ""
+    });
+
+    useEffect(() => {
+        setBookCollection(searchedBook)
+        if (searchedBook) {
+            if (searchedBook.length == 0) {
+                setAlert({ open: true, message: "No such book found", severity:"error"})
+            }
+        }
+        
+    },[searchedBook])
+    useEffect(() => {
+        setBookCollection(books)
+    },[books])
+
     return (
         <div className="books">
-            {books.length > 0 ? (
-                books.map((book) => (
+            <Slide direction="up" in={alert.open} mountOnEnter unmountOnExit>
+            <Snackbar className="snackbar" open={alert.open} autoHideDuration={1000}  >
+                <Alert
+                    severity={alert.severity}
+                    variant="filled"
+                    onClose={() => {
+                        window.location.href = "/"
+                        setAlert({ open: false, message: "" })
+                    }}
+                    className="alert"
+                    sx={{ width: "20rem" }}
+                >
+                    {alert.message}
+                </Alert>
+            </Snackbar>
+            </Slide>
+            {bookCollecion.length > 0 ? (
+                bookCollecion.map((book) => (
                     <div className="books-wrap" key={book.id}>
                         <div className="books-left">{book.summary || "Provide summary"}</div>
                         <div className="books-right">

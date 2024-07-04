@@ -8,6 +8,7 @@ let id = 0
 const BookContextProvider = (props) => {
     let [books, setBooks] = useState([])
     const [user, setUser] = useState("")
+    const [searchedBook, setSearchedBook] = useState()
     useEffect(() => {
         const allBooks = async () => {
             const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/allbooks`, { email: user }, {
@@ -54,9 +55,17 @@ const BookContextProvider = (props) => {
         });
     };
 
+    const findBook = (bookName) => {
+        const response = books.filter((book) => book.name.toLowerCase() == bookName.toLowerCase() || book.author.toLowerCase() == bookName.toLowerCase() || book.isbn.toLowerCase() == bookName.toLowerCase() || book.rating.toLowerCase() == bookName.toLowerCase() || book.date.toLowerCase() == bookName.toLowerCase())
+        setSearchedBook(response)
+        if (!response.length == 0) {
+            window.scrollTo(550,550) 
+        } 
+        
+    }
 
 
-    const contextValue = { books, addBook, removeBook, setUser, updateBook }
+    const contextValue = { books, addBook, removeBook, setUser, updateBook, findBook,  searchedBook}
     return <BookContext.Provider value={contextValue}>{props.children}</BookContext.Provider>
 }
 
