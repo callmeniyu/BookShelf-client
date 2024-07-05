@@ -71,7 +71,7 @@ const AddBook = () => {
         const sendImage = async () => {
             const newForm = new FormData()
             newForm.append("book", image)
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/upload`, newForm)
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}upload`, newForm)
             const data = response.data
             if (data.success) {
                 formData.img = data.img_url

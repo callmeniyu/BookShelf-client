@@ -11,7 +11,7 @@ const BookContextProvider = (props) => {
     const [searchedBook, setSearchedBook] = useState()
     useEffect(() => {
         const allBooks = async () => {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/allbooks`, { email: user }, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}allbooks`, { email: user }, {
                 headers: {
                     "auth-token":localStorage.getItem("auth-token") || localStorage.getItem("g-token")
                 }
@@ -31,7 +31,7 @@ const BookContextProvider = (props) => {
         } else {
             book.id = 1
         }
-        const response = await axios.patch(`${import.meta.env.VITE_BACKEND_API}/addbook`, { email: user, ...book }, {
+        const response = await axios.patch(`${import.meta.env.VITE_BACKEND_API}addbook`, { email: user, ...book }, {
             headers: {
                 "auth-token": localStorage.getItem("auth-token") || localStorage.getItem("g-token")
             }
@@ -39,7 +39,7 @@ const BookContextProvider = (props) => {
     }
 
     const removeBook = async (bookId) => {
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/removebook`, { bookId }, {
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}removebook`, { bookId }, {
             headers: {
                 "auth-token": localStorage.getItem("auth-token") || localStorage.getItem("g-token")
             }
@@ -48,7 +48,7 @@ const BookContextProvider = (props) => {
 
     const updateBook = async (bookId, formData) => {
         console.log(bookId, formData)
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/updatebook`, { bookId:bookId, formData:formData}, {
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}updatebook`, { bookId:bookId, formData:formData}, {
             headers: {
                 "auth-token": localStorage.getItem("auth-token") || localStorage.getItem("g-token")
             }

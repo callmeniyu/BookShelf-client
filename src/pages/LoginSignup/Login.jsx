@@ -15,7 +15,7 @@ const Login = () => {
                 });
                 const email = result.data.email
                 console.log(email)
-                const res = await axios.post(`${import.meta.env.VITE_BACKEND_API}/googlelogin`, {
+                const res = await axios.post(`${import.meta.env.VITE_BACKEND_API}googlelogin`, {
                     email: email,
                 })
                 const token = res.data.token
