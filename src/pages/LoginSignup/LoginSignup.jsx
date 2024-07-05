@@ -61,7 +61,7 @@ const LoginSignup = () => {
 
     const userLogout = () => {
         localStorage.removeItem("auth-token")
-        window.location.reload(false)
+        window.location.href = "/"
     }
 
     return (
