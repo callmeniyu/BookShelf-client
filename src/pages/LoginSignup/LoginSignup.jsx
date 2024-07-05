@@ -31,7 +31,7 @@ const LoginSignup = () => {
     const userLogin = async () => {
         try {
             console.log("User data submitted ", formData)
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/login`, { formData })
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}login`, { formData })
             const data = response.data
             if (data.success) {
                 localStorage.setItem("auth-token", data.token)
@@ -46,7 +46,7 @@ const LoginSignup = () => {
 
     const userSignup = async () => {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/signup`, { formData })
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}signup`, { formData })
             const data = response.data
             if (data.success) {
                 localStorage.setItem("auth-token", data.token)
