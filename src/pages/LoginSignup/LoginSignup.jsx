@@ -84,11 +84,7 @@ const LoginSignup = () => {
                     </Snackbar>
                 </Slide>
                 {localStorage.getItem("auth-token") ? (
-                    <div
-                        onClick={() => userLogout()}
-                    >
-                        Logout
-                    </div>
+                    <div className="loginsignup-logout" onClick={userLogout}>Logout</div>
                 ) : (
                     <div className={`loginsignup-container  ${localStorage.getItem("g-token") ? "disabled" : ""}`}>
                         <h1>{state}</h1>
