@@ -85,7 +85,6 @@ const LoginSignup = () => {
                 </Slide>
                 {localStorage.getItem("auth-token") ? (
                     <div
-                        className={`loginsignup-logout ${localStorage.getItem("g-token") ? "disabled" : ""}`}
                         onClick={() => userLogout()}
                     >
                         Logout
