@@ -9,7 +9,7 @@ import LoginSignup from "./pages/LoginSignup/LoginSignup"
 
 function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/tothepoint_login">
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
