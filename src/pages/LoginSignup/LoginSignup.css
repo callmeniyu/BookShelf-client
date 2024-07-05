@@ -11,7 +11,7 @@
     height: 100vh;
     gap: 8rem;
     font-family: "Montserrate",sans-serif;
-    background-color: #a48ecc;
+    background-color: #f2cc8f;
 }
 
 .loginsignup-container {
@@ -26,7 +26,7 @@
     border-radius: 6px;
 }
 .loginsignup-logout{
-    background: #51397e;
+    background: #264653;
     outline: none;
     border: none;
     color: white;
@@ -60,7 +60,7 @@
 }
 .loginsignup-container > button {
     height: 2.8rem;
-    background: #51397e;
+    background: #264653;
     outline: none;
     border: none;
     color: white;
@@ -108,6 +108,7 @@
 }
 .loginsignup-google-ggl{
     display: flex;
+    cursor: pointer;
     gap: 1rem;
     width: 17rem;
     justify-content: center;
@@ -121,10 +122,11 @@
     border-radius: 5px;
     font-size: 1rem !important;
     color: #000 !important;
+    border: none;
 }
 .loginsignup-google-ggl:hover{
-    background-color: #615EFC;
-    color: #fff;
+    background-color: #264653;
+    color: #fff !important;
 }
 .disabled{
     pointer-events: none;

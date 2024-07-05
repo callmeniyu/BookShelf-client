@@ -1,40 +1,38 @@
 import React from "react"
-import "./Login.css"
-import { GoogleLogin } from "react-google-login"
+import { useGoogleLogin } from '@react-oauth/google';
 import axios from "axios"
+import GoogleIcon from '@mui/icons-material/Google';
 
 const Login = () => {
-    const onSuccess = async (res) => {
-        console.log("Login succes", res.profileObj)
 
-        try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/googlelogin`, {
-                email: res.profileObj.email,
-            })
-            const token = response.data.token
-            if (!localStorage.getItem("g-token")) window.location.href = "/"
-            localStorage.setItem("g-token", token)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    const login = useGoogleLogin({
+        onSuccess:async (response) => {
+            try {
+                const result = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+                    headers: {
+                        Authorization: `Bearer ${response.access_token}`
+                    }
+                });
+                const email = result.data.email
+                console.log(email)
+                const res = await axios.post(`${import.meta.env.VITE_BACKEND_API}/googlelogin`, {
+                    email: email,
+                })
+                const token = res.data.token
+                localStorage.setItem("g-token", token)
+                if (localStorage.getItem("g-token")) window.location.href = "/"
+                
+            } catch (error) {
+                console.log(error)
+            }
+        },
 
-    const onFailure = (res) => {
-        console.log("Login failed", res)
-    }
-
+      });
+      
     return (
-        <div id="signInButton" className={`${localStorage.getItem("auth-token") ? "disabled" : ""}`}>
-            <GoogleLogin
-                clientId={import.meta.env.VITE_GAuth_Client_ID}
-                buttonText="Login using Google"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-                cookiePolicy={"single_host_origin"}
-                isSignedIn={true}
-                className="loginsignup-google-ggl"
-            />
-        </div>
+        <>
+            <button className={`loginsignup-google-ggl ${localStorage.getItem("auth-token") ? "disabled" : ""}`} onClick={() => login()}><GoogleIcon /> Sign in with Google</button>
+        </>
     )
 }
 

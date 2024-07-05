@@ -3,7 +3,6 @@ import "./LoginSignup.css"
 import Login from "./Login"
 import Logout from "./Logout"
 import Footer from "../../components/Footer/Footer"
-import { gapi } from "gapi-script"
 import axios from "axios"
 import { Alert, Slide, Snackbar } from "@mui/material"
 import Navbar from "../../components/Navbar/Navbar"
@@ -27,15 +26,7 @@ const LoginSignup = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    useEffect(() => {
-        function start() {
-            gapi.client.init({
-                clientId: import.meta.env.VITE_GAuth_Client_ID,
-                scope: "",
-            })
-        }
-        gapi.load("client:auth2", start)
-    }, [])
+
 
     const userLogin = async () => {
         try {

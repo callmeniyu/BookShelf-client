@@ -1,22 +1,18 @@
-import React from 'react'
-import { GoogleLogout } from 'react-google-login'
+import React from "react"
+import GoogleIcon from '@mui/icons-material/Google';
 
 const Logout = () => {
-    const onSuccess = () => {
+    const handleLogout = () => {
         localStorage.removeItem("g-token")
-        console.log("Logout Succesfull")
-        window.location.reload(false)
+        window.location.href = "/"
     }
-  return (
-      <div id="signOutButton" >
-          <GoogleLogout 
-              clientId={import.meta.env.VITE_GAuth_Client_ID}
-              buttonText='Logout'
-              onLogoutSuccess={onSuccess}
-              className="loginsignup-google-ggl"
-          />
-    </div>
-  )
+    return (
+        <>
+            <button className="loginsignup-google-ggl" onClick={() => handleLogout()}>
+                <GoogleIcon /> Sign out  Google
+            </button>
+        </>
+    )
 }
 
 export default Logout
