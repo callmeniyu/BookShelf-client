@@ -1,7 +1,6 @@
 import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import Bookshelf_img from "../../assets/images/Bookshelf_img.png"
-import { BookContext } from "../../context/BookContext.jsx"
 import "./Hero.css"
 
 const Hero = () => {

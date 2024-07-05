@@ -54,7 +54,7 @@ const AddBook = () => {
     const validationSchema = Yup.object({
         name: Yup.string().required("Give name of the book"),
         author: Yup.string().required("Give author name").max(30, "Author name should be less than 30 chararcters"),
-        isbn: Yup.number().typeError("isbn must be a number").required("isbn number is required"),
+        isbn: Yup.number().typeError("isbn must be a number").required("ISBN number is required"),
         date: Yup.string().required("Give a date "),
         link: Yup.string().required("Give online link"),
         summary: Yup.string()
@@ -71,7 +71,7 @@ const AddBook = () => {
         const sendImage = async () => {
             const newForm = new FormData()
             newForm.append("book", image)
-            const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/upload`, newForm)
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/upload`, newForm)
             const data = response.data
             if (data.success) {
                 formData.img = data.img_url
@@ -99,7 +99,7 @@ const AddBook = () => {
             })
             setErrors(newErrors)
             if (!image) {
-                setErrors((prev) => ({ ...prev, img: "needed" }))
+                setErrors((prev) => ({ ...prev, img: "Image needed" }))
             }
         }
     }

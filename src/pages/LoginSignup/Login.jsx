@@ -8,7 +8,7 @@ const Login = () => {
         console.log("Login succes", res.profileObj)
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_LOCAL_API}/googlelogin`, {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}/googlelogin`, {
                 email: res.profileObj.email,
             })
             const token = response.data.token
